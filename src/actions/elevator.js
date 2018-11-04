@@ -51,13 +51,15 @@ export const elevatorMovingToGround = () => ({
 export const elevatorArrivedToFirst = () => ({
   type: 'ELEVATOR_ARRIVED_TO_FIRST',
   elevatorIsMoving: false,
-  elevatorLocation: 1
+  elevatorLocation: 1,
+  firstFloorRequested: false
 });
 
 export const elevatorArrivedToGround = () => ({
   type: 'ELEVATOR_ARRIVED_TO_GROUND',
   elevatorIsMoving: false,
-  elevatorLocation: 0
+  elevatorLocation: 0,
+  groundFloorRequested: false
 });
 
 export const setGroundFloorTimer = value => ({
@@ -138,25 +140,17 @@ export const groundFloorRequest = () => {
     }
     else { // location === 1
       if (getState().elevator.firstFloorDoorOpen) {
-        console.log(getState().elevator.groundFloorRequested);
         if (getState().elevator.groundFloorRequested) {
-          dispatch(elevatorMovingToGround());
-          setTimeout(function () {
-            dispatch(elevatorArrivedToGround());
-            operateDoor(
-              dispatch,
-              getState,
-              openElevatorDoor,
-              openGroundFloorDoor,
-              setGroundFloorTimer,
-              closeElevatorDoor,
-              closeGroundFloorDoor,
-              requestFirstFloor,
-              () => getState().elevator.groundFloorOpenTimer,
-              () => getState().elevator.firstFloorRequested,
-              firstFloorRequest
-            );
-          }, 2000);
+          const myFunc01 = () => {
+            groundFloorRequest();
+            setTimeout(function () {
+              if (getState().elevator.groundFloorRequested) {
+                myFunc01();
+              }
+            }, 500);
+          }
+
+          myFunc01();
         } else {
           dispatch(requestGroundFloor(true));
         }
@@ -210,25 +204,10 @@ export const firstFloorRequest = () => {
     }
     else { // location === 0
       if (getState().elevator.groundFloorDoorOpen) {
-
         if (getState().elevator.firstFloorRequested) {
-          dispatch(elevatorMovingToFirst());
           setTimeout(function () {
-            dispatch(elevatorArrivedToFirst());
-            operateDoor(
-              dispatch,
-              getState,
-              openElevatorDoor,
-              openFirstFloorDoor,
-              setFirstFloorTimer,
-              closeElevatorDoor,
-              closeFirstFloorDoor,
-              requestGroundFloor,
-              () => getState().elevator.firstFloorOpenTimer,
-              () => getState().elevator.groundFloorRequested,
-              groundFloorRequest
-            );
-          }, 2000);
+            firstFloorRequest();
+          }, 500);
         } else {
           dispatch(requestFirstFloor(true));
         }
