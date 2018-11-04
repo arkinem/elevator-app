@@ -6,4 +6,15 @@ const ElevatorRequestButton = (props) => (
   </div>
 );
 
+/*
+
+if
+
+elevator is not moving
+elevator is on correct floor
+elevator door are closed
+floor foor are closed
+
+*/
+
 export default ElevatorRequestButton;

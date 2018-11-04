@@ -1,5 +1,7 @@
 // Elevator Reducer
 
+//ground requested
+//first requested
 const elevatorReducerDefaultState = {
   elevatorIsMoving: false,
   elevatorLocation: 0,
