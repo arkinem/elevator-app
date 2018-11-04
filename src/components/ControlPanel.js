@@ -6,7 +6,7 @@ import { openElevatorDoor, closeElevatorDoor } from '../actions/elevator';
 const ControlPanel = (props) => (
   <div className="control-panel">
     <div className="control-panel-display">
-      <span>1</span>
+      <span>{props.elevatorLocation}</span>
     </div>
 
     <div className="control-panel-button" onClick={props.openElevatorDoor}>
@@ -19,10 +19,14 @@ const ControlPanel = (props) => (
   </div>
 );
 
+const mapStateToProps = (state) => ({
+  elevatorLocation: state.elevator.elevatorLocation
+});
+
 const mapDispatchToProps = (dispatch) => ({
   openElevatorDoor: () => dispatch(openElevatorDoor()),
   closeElevatorDoor: () => dispatch(closeElevatorDoor())
 });
 
-export default connect(undefined, mapDispatchToProps)(ControlPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(ControlPanel);
 

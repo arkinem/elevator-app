@@ -7,13 +7,13 @@ import ElevatorCabinDoor from './ElevatorCabinDoor';
 
 const Elevator = () => (
   <div className="elevator-container">
-    <ElevatorRequestButton marginTop={65} />
-    <ElevatorDoor marginTop={13} />
+    <ElevatorRequestButton marginTop={65} floor={1} />
+    <ElevatorDoor floor={1} />
     <ElevatorCabinDoor />
     <ElevatorCabin />
     <ElevatorGround />
-    <ElevatorRequestButton marginTop={265} />
-    <ElevatorDoor marginTop={213} />
+    <ElevatorRequestButton marginTop={265} floor={0} />
+    <ElevatorDoor floor={0} />
   </div>
 );
 
