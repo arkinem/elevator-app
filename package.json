@@ -4,13 +4,16 @@
   "main": "index.js",
   "author": "arkinem [BG]",
   "license": "MIT",
+  "engines": {
+    "node": "8.11.4"
+  },
   "scripts": {
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
     "start": "node server/server.js",
-    "heroku-postbuild": "yarn run build:prod"
+    "heroku-postbuild": "npm run build:prod"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
