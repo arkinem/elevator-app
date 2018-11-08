@@ -331,5 +331,6 @@ ASALocalRun/
 
 node_modules/
 public/dist/
-# .env.test
-# .env.development
+.env.test
+.env.development
+.env.production
